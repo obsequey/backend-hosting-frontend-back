@@ -1,12 +1,7 @@
 FROM node:12-alpine
 
 COPY ./ /app
-WORKDIR /app/user-list-front
-
-RUN npm i
-RUN npm run build:mac
-
-WORKDIR /app/user-list-back
+WORKDIR /app
 
 RUN npm i
 RUN npm run build

@@ -4,9 +4,22 @@ pipeline {
     GIT_REPO_NAME = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
     SOME_SECRET_KEY = credentials('some-secret-key')
     REGISTRY_HOST = credentials('docker-registry-host')
+    FRONT_REPO_URL = 'https://github.com/obsequey/backend-hosting-frontend-front'
   }
   stages {
-    stage('Package Docker container') {
+    stage('Build frontend and move dist folder') {
+      steps {
+        sh 'mkdir -p front'
+        dir('front') {
+          git(url: '${FRONT_REPO_URL}', branch: '${GIT_BRANCH}')
+          sh 'npm i'
+          sh 'npm run build:mac'
+          sh 'mv -p dist ../.'
+        }
+      }
+    }
+
+    stage('Build and run backend image') {
       steps {
         sh 'echo ${SOME_SECRET_KEY}'
         sh 'docker build . -t "${REGISTRY_HOST}/${GIT_REPO_NAME}-${BRANCH_NAME}"'
