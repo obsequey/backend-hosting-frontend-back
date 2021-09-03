@@ -13,7 +13,7 @@ pipeline {
       steps {
         sh 'mkdir -p front'
         dir('front') {
-          checkout scm(source: env.FRONT_REPO_URL, branch: env.GIT_BRANCH)
+          git(source: env.FRONT_REPO_URL, branch: env.GIT_BRANCH)
           sh 'npm i'
           sh 'npm run build:mac'
           sh 'mv -p dist ../.'
