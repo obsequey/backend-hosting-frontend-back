@@ -5,7 +5,7 @@ pipeline {
     GIT_REPO_NAME = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
     SOME_SECRET_KEY = credentials('some-secret-key')
     REGISTRY_HOST = credentials('docker-registry-host')
-    FRONT_REPO_URL = 'https://github.com/obsequey/backend-hosting-frontend-front.git'
+    FRONT_REPO_URL = 'git@github.com:obsequey/backend-hosting-frontend-front.git'
   }
 
   stages {
