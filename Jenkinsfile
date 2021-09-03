@@ -7,11 +7,11 @@ pipeline {
     FRONT_REPO_URL = 'https://github.com/obsequey/backend-hosting-frontend-front'
   }
   stages {
-    stage('Build frontend and move dist folder') {
+    stage('Build frontend') {
       steps {
         sh 'mkdir -p front'
         dir('front') {
-          git(url: '${FRONT_REPO_URL}', branch: '${GIT_BRANCH}')
+          git(url: env.FRONT_REPO_URL, branch: env.GIT_BRANCH)
           sh 'npm i'
           sh 'npm run build:mac'
           sh 'mv -p dist ../.'
@@ -19,7 +19,7 @@ pipeline {
       }
     }
 
-    stage('Build and run backend image') {
+    stage('Build backend') {
       steps {
         sh 'echo ${SOME_SECRET_KEY}'
         sh 'docker build . -t "${REGISTRY_HOST}/${GIT_REPO_NAME}-${BRANCH_NAME}"'
