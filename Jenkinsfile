@@ -19,7 +19,6 @@ pipeline {
         sh 'mkdir -p front'
         dir('front') {
           git(url: env.FRONT_REPO_URL, branch: env.GIT_BRANCH, credentialsId: 'github')
-          sh 'sudo chown -R 112:117 "/.npm"'
           sh 'npm i'
           sh 'npm run build:mac'
           sh 'mv -p dist ../.'
