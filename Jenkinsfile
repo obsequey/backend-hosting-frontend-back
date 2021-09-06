@@ -19,13 +19,11 @@ pipeline {
         HOME = '.'
       }
       steps {
-        sh 'mkdir -p front'
-        dir('front') {
+        sh 'mkdir -p front-repo'
+        dir('front-repo') {
           git(url: env.FRONT_REPO_URL, branch: env.GIT_BRANCH, credentialsId: 'github')
-          sh 'ls'
           sh 'npm i'
           sh 'npm run build:mac'
-          sh 'mv -p dist ../.'
         }
       }
     }
