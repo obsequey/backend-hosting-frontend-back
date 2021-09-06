@@ -12,14 +12,13 @@ pipeline {
     stage('Build frontend') {
       agent {
         docker {
-          image 'node:14-slim'
+          image 'node:14-alpine'
         }
       }
       steps {
         sh 'mkdir -p front'
         dir('front') {
           git(url: env.FRONT_REPO_URL, branch: env.GIT_BRANCH, credentialsId: 'github')
-          sh 'whoami'
           sh 'ls'
           sh 'mkdir /.npm'
           sh 'npm i'
