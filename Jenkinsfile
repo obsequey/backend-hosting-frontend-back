@@ -12,7 +12,7 @@ pipeline {
     stage('Build frontend') {
       agent {
         docker {
-          image 'node:14-alpine'
+          image 'node:14-slim'
         }
       }
       steps {
