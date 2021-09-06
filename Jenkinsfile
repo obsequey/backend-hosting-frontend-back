@@ -15,6 +15,9 @@ pipeline {
           image 'node:14-alpine'
         }
       }
+      environment {
+        HOME = '.'
+      }
       steps {
         sh 'mkdir -p front'
         dir('front') {
