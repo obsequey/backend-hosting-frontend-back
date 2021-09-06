@@ -10,15 +10,16 @@ pipeline {
 
   stages {
     stage('Build frontend') {
-      // agent {
-      //   docker {
-      //     image 'node:14-slim'
-      //   }
-      // }
+      agent {
+        docker {
+          image 'node:14-slim'
+        }
+      }
       steps {
         sh 'mkdir -p front'
         dir('front') {
           git(url: env.FRONT_REPO_URL, branch: env.GIT_BRANCH, credentialsId: 'github')
+          sh 'npm cache clean --force'
           sh 'npm i'
           sh 'npm run build:mac'
           sh 'mv -p dist ../.'
