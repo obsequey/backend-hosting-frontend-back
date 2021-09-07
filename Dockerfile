@@ -6,9 +6,9 @@ COPY ./package.json /app
 RUN npm i
 COPY ./ /app
 
-RUN npm run build
-RUN cp ./front-repo/node_modules/ /app/node_modules
+RUN cp -rf ./front-repo/node_modules/ /app/node_modules
 RUN rm -rf front-repo
+RUN npm run build
 
 EXPOSE 3000
 
