@@ -31,6 +31,7 @@ pipeline {
     stage('Build backend') {
       steps {
         sh 'echo ${SOME_SECRET_KEY}'
+        sh 'ls'
         sh 'docker build . -t "${REGISTRY_HOST}/${GIT_REPO_NAME}-${BRANCH_NAME}"'
         sh 'docker push ${REGISTRY_HOST}/${GIT_REPO_NAME}-${BRANCH_NAME}'
         sh 'docker stop ${GIT_REPO_NAME}-${BRANCH_NAME} || true'
