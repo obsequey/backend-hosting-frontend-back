@@ -4,13 +4,6 @@ WORKDIR /app
 COPY ./ /app
 
 RUN npm ci
-
-RUN ls
-RUN ls front
-RUN cp -rf front/node_modules/ node_modules/
-RUN rm -rf front/node_modules
-RUN ls
-
 RUN npm run build
 
 EXPOSE 3000
