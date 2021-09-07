@@ -24,16 +24,7 @@ pipeline {
           git(url: env.FRONT_REPO_URL, branch: env.GIT_BRANCH, credentialsId: 'github')
           sh 'npm i'
           sh 'npm run build:mac'
-          sh 'ls'
-          sh 'ls ../.'
-          sh 'mkdir node_modules-front'
-          sh 'cp -r node_modules ../node_modules-front'
         }
-      }
-    }
-
-    stage('Build backend') {
-      steps {
         sh 'echo ${SOME_SECRET_KEY}'
         sh 'ls'
         sh 'docker build . -t "${REGISTRY_HOST}/${GIT_REPO_NAME}-${BRANCH_NAME}"'
@@ -47,6 +38,5 @@ pipeline {
         '''
       }
     }
-
   }
 }
