@@ -17,7 +17,7 @@ pipeline {
 				sh 'mkdir -p front-repo'
 				dir('front-repo') {
 					git(url: env.FRONT_REPO_URL, branch: env.GIT_BRANCH, credentialsId: 'github')
-					sh 'npm i'
+					sh 'npm ci'
 					sh 'npm run build:mac'
 					sh 'cp -r node_modules ../front/'
 					sh 'ls ../front'
