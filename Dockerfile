@@ -5,8 +5,9 @@ COPY ./ /app
 
 RUN npm i
 
-RUN cp -rf /app/front-repo/node_modules/ /app/node_modules
-RUN rm -rf front-repo
+RUN cp -rf front/node_modules/ node_modules/
+RUN rm -rf front/node_modules
+
 RUN npm run build
 
 EXPOSE 3000
