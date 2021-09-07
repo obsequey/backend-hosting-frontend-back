@@ -10,14 +10,9 @@ pipeline {
 
 	stages {
 		stage('Build frontend') {
-			agent {
-				docker {
-					image 'node:14-alpine'
-				}
-			}
-			environment {
-				HOME = '.'
-			}
+			// environment {
+			// 	HOME = '.'
+			// }
 			steps {
 				sh 'mkdir -p front-repo'
 				dir('front-repo') {
